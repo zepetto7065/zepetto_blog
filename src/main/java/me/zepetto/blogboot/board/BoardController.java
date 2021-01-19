@@ -14,11 +14,15 @@ public class BoardController {
     @Autowired
     BoardService boardService;
 
-    @GetMapping("/index")
+    @GetMapping("/blog")
     public String blog(){
         return "views/board/list";
     }
 
+    @GetMapping("/post")
+    public String post(){
+        return "views/board/form";
+    }
 
     @GetMapping("/hello")
     public String index(){
