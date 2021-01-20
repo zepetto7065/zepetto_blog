@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -33,6 +35,14 @@ public class BoardController {
     @GetMapping("/form")
     public String createForm(Model m, Long bno){
         return "views/board/form";
+    }
+
+    @PostMapping("/create")
+    public String create(Board board){
+        System.out.println(board.getWriter());
+        System.out.println(board.getContent());
+
+        return "redirect:/";
     }
 
 }
