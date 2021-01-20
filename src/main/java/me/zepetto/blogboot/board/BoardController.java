@@ -1,7 +1,9 @@
 package me.zepetto.blogboot.board;
 
+import me.zepetto.blogboot.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -13,13 +15,23 @@ public class BoardController {
     BoardService boardService;
 
 
-    @GetMapping("/blog")
-    public String blog(){
+    @GetMapping("/list")
+    public String list(Model m){
+        m.addAttribute("boards",boardService.getList());
         return "views/board/list";
     }
 
-    @GetMapping("/post")
-    public String post(){
+    @GetMapping("/detail")
+    public String detail(Model m, Long bno){
+        Board board = boardService.getBoard(bno)
+                .orElseThrow(() -> new ResourceNotFoundException("Board Not Found , Bno is ::: " + bno ));
+
+        m.addAttribute("board",board);
+        return "views/board/detail";
+    }
+
+    @GetMapping("/form")
+    public String createForm(Model m, Long bno){
         return "views/board/form";
     }
 

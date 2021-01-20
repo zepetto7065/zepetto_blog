@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -14,5 +15,10 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public List<Board> getList() {
         return boardRepository.findAll();
+    }
+
+    @Override
+    public Optional<Board> getBoard(Long bno) {
+        return boardRepository.findById(bno);
     }
 }
